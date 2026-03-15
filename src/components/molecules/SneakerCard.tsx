@@ -1,8 +1,9 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { clsx } from 'clsx';
 import { Badge } from '@/components/atoms/Badge';
 import { ScarcityDot } from '@/components/atoms/ScarcityDot';
@@ -14,10 +15,10 @@ import { getScarcityLevel, type Product } from '@/lib/types';
    SneakerCard — Core product card component.
 
    Interaction behaviour per brand blueprint:
-   - Slight 3D tilt on hover (via Framer Motion)
-   - scale(1.02) max — never more
-   - Scarcity dot + badge overlaid
-   - Dark bg, focus ring in gold
+   - Magnetic 3D tilt on hover (max 6deg)
+   - Secondary image crossfade reveal
+   - Micro-zoom and subtle lighting effect
+   - Elevated drop shadow and translation on hover
    ───────────────────────────────────────────── */
 
 interface SneakerCardProps {
@@ -29,21 +30,55 @@ interface SneakerCardProps {
 
 export function SneakerCard({ product, featured = false, className }: SneakerCardProps) {
   const scarcityLevel = getScarcityLevel(product.totalPairsLeft);
-  const primaryImage =
-    product.images.find((img) => img.isPrimary) ?? product.images[0];
+  const primaryImage = product.images.find((img) => img.isPrimary) ?? product.images[0];
+  const secondaryImage = product.images.length > 1 ? product.images.find((img) => img !== primaryImage) : primaryImage;
+
+  const [isHoverable, setIsHoverable] = useState(false);
+  useEffect(() => {
+    setIsHoverable(window.matchMedia('(hover: hover) and (pointer: fine)').matches);
+  }, []);
+
+  // Magnetic hover state
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const mouseXSpring = useSpring(x, { stiffness: 300, damping: 30 });
+  const mouseYSpring = useSpring(y, { stiffness: 300, damping: 30 });
+
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], [6, -6]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], [-6, 6]);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    if (!isHoverable) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+    const xPct = mouseX / width - 0.5;
+    const yPct = mouseY / height - 0.5;
+    x.set(xPct);
+    y.set(yPct);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
 
   return (
     <motion.article
-      // 3D tilt hover effect — max scale 1.02 per design spec
-      whileHover={{ scale: 1.02, y: -4, rotateY: 2 }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={isHoverable ? { rotateX, rotateY, transformPerspective: 1000 } : {}}
       whileTap={{ scale: 0.98 }}
-      transition={{ duration: 0.28, ease: [0.25, 0.1, 0.25, 1] }}
-      // motion-reduce: browser handles suppression via @media (prefers-reduced-motion)
       className={clsx(
         'group relative flex flex-col',
         'bg-surface border border-border rounded-card',
-        'overflow-hidden cursor-pointer',
-        // Gold ring on keyboard focus — WCAG visible focus
+        'overflow-hidden cursor-pointer shadow-sm',
+        // Card depth
+        'transition-all duration-300 ease-out',
+        'hover:shadow-xl md:hover:-translate-y-[6px]',
+        // Gold ring on keyboard focus
         'focus-within:ring-2 focus-within:ring-gold focus-within:ring-offset-1 focus-within:ring-offset-void',
         featured ? 'min-h-96' : '',
         className
@@ -51,24 +86,40 @@ export function SneakerCard({ product, featured = false, className }: SneakerCar
       aria-labelledby={`product-name-${product.id}`}
     >
       {/* ── Image Area ── */}
-      <figure className="relative aspect-square overflow-hidden bg-void shrink-0">
+      <figure className="relative aspect-square overflow-hidden bg-void shrink-0 z-0">
+        {/* Radial highlight lighting effect */}
+        <div 
+          className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.06)_0%,transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-0" 
+          aria-hidden="true" 
+        />
+        
         {primaryImage ? (
-          <Image
-            src={primaryImage.url}
-            alt={primaryImage.alt}
-            fill
-            sizes={featured ? '(max-width: 768px) 100vw, 50vw' : '(max-width: 768px) 50vw, 33vw'}
-            className="object-contain p-md transition-transform duration-slow group-hover:scale-105 motion-reduce:transition-none"
-          />
+          <motion.div layoutId={`product-image-${product.slug}`} className="absolute inset-0 z-10 pointer-events-none">
+            <Image
+              src={primaryImage.url}
+              alt={primaryImage.alt}
+              fill
+              sizes={featured ? '(max-width: 768px) 100vw, 50vw' : '(max-width: 768px) 50vw, 33vw'}
+              className="object-contain p-6 transition-all duration-300 ease-out group-hover:scale-105 group-hover:opacity-0 motion-reduce:transition-none relative"
+            />
+            {secondaryImage && (
+              <Image
+                src={secondaryImage.url}
+                alt={`${primaryImage.alt} - Alternate View`}
+                fill
+                sizes={featured ? '(max-width: 768px) 100vw, 50vw' : '(max-width: 768px) 50vw, 33vw'}
+                className="object-contain p-6 transition-all duration-300 ease-out opacity-0 scale-95 group-hover:scale-105 group-hover:opacity-100 motion-reduce:transition-none absolute inset-0"
+              />
+            )}
+          </motion.div>
         ) : (
-          // Placeholder silhouette when no image provided
-          <div className="absolute inset-0 flex items-center justify-center">
+          <div className="absolute inset-0 flex items-center justify-center z-10">
             <span className="text-muted text-mono-label">No Image</span>
           </div>
         )}
 
         {/* ── Overlaid Badges ── */}
-        <div className="absolute top-sm left-sm flex flex-col gap-xs" aria-hidden="true">
+        <div className="absolute top-sm left-sm flex flex-col gap-xs z-20" aria-hidden="true">
           {product.condition === 'DS' && (
             <Badge variant="condition">DS</Badge>
           )}
@@ -78,13 +129,13 @@ export function SneakerCard({ product, featured = false, className }: SneakerCar
         </div>
 
         {/* ── Scarcity dot — top right ── */}
-        <div className="absolute top-sm right-sm">
+        <div className="absolute top-sm right-sm z-20">
           <ScarcityDot level={scarcityLevel} showLabel />
         </div>
       </figure>
 
       {/* ── Card Body ── */}
-      <div className="flex flex-col flex-1 p-md gap-xs">
+      <div className="flex flex-col flex-1 p-6 gap-xs relative z-10 bg-surface">
         {/* Brand */}
         <MonoLabel muted className="text-xs">
           {product.brand}
@@ -93,7 +144,7 @@ export function SneakerCard({ product, featured = false, className }: SneakerCar
         {/* Model Name — the primary link */}
         <h3
           id={`product-name-${product.id}`}
-          className="font-sans font-semibold text-primary text-sm leading-tight"
+          className="font-sans font-medium text-primary text-base leading-tight"
         >
           <Link
             href={`/product/${product.slug}`}
@@ -109,8 +160,8 @@ export function SneakerCard({ product, featured = false, className }: SneakerCar
           {product.colorway}
         </MonoLabel>
 
-        {/* ── Footer: year + price ── */}
-        <div className="mt-auto pt-sm flex items-center justify-between border-t border-border">
+        {/* ── Footer: year + price (Transforms on Hover) ── */}
+        <div className="mt-auto pt-sm flex items-center justify-between border-t border-border opacity-70 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 ease-out">
           <MonoLabel muted className="text-xs">
             {product.releaseYear}
           </MonoLabel>

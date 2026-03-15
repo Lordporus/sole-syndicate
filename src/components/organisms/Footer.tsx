@@ -48,7 +48,7 @@ export function Footer() {
       className="bg-void border-t border-border"
     >
       {/* ── Main grid ── */}
-      <div className="px-md md:px-xl py-4xl">
+      <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 py-28">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-2xl">
 
           {/* ── Brand column ── */}
@@ -108,7 +108,7 @@ export function Footer() {
       </div>
 
       {/* ── Bottom bar ── */}
-      <div className="px-md md:px-xl py-md border-t border-border flex flex-col sm:flex-row items-center justify-between gap-sm">
+      <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 py-md border-t border-border flex flex-col sm:flex-row items-center justify-between gap-sm">
         <MonoLabel muted>
           &copy; {new Date().getFullYear()} Sole Syndicate. All rights reserved.
         </MonoLabel>

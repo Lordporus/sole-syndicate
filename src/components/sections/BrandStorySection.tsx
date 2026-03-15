@@ -12,9 +12,9 @@ import { motion } from 'framer-motion';
 
 export function BrandStorySection() {
   return (
-    <article
-      aria-labelledby="brand-story-heading"
-      className="py-5xl px-md md:px-xl bg-void border-t border-b border-border relative overflow-hidden"
+    <section
+      aria-labelledby="story-heading"
+      className="py-28 px-6 md:px-10 lg:px-16 w-full max-w-[1440px] mx-auto bg-void border-t border-b border-border relative overflow-hidden"
     >
       {/* Faint gold accent line — left edge */}
       <div
@@ -25,11 +25,11 @@ export function BrandStorySection() {
       <div className="max-w-4xl mx-auto text-center">
         {/* Eyebrow */}
         <motion.p
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-10%' }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="text-mono-label text-secondary mb-2xl"
+          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          className="text-mono-label text-secondary mb-8"
         >
           Our Standard
         </motion.p>
@@ -41,11 +41,11 @@ export function BrandStorySection() {
 
         {/* Pull quote — Cormorant Garamond Italic */}
         <motion.blockquote
-          initial={{ opacity: 0, y: 32 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-10%' }}
-          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-          className="font-serif italic text-3xl md:text-5xl text-primary leading-relaxed mb-2xl"
+          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+          className="font-serif italic text-[32px] md:text-[48px] lg:text-[72px] leading-[1.1] tracking-tight text-primary mb-8"
         >
           &ldquo;We refused to build another marketplace. The greatest pairs in history
           don&rsquo;t belong in a resale feed. They belong in a space that respects their
@@ -54,17 +54,17 @@ export function BrandStorySection() {
 
         {/* Supporting body */}
         <motion.p
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-10%' }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.25 }}
-          className="font-sans text-secondary text-base md:text-lg leading-relaxed max-w-2xl mx-auto"
+          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1], delay: 0.25 }}
+          className="font-serif italic text-secondary text-lg leading-[30px] max-w-[640px] mx-auto"
         >
           Sole Syndicate exists to give rare sneakers the presentation they deserve.
           Every pair authenticated. Every listing curated.
           No hype without substance.
         </motion.p>
       </div>
-    </article>
+    </section>
   );
 }

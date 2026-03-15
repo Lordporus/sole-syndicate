@@ -4,6 +4,7 @@ import "./globals.css";
 import { Navbar } from "@/components/organisms/Navbar";
 import { CartDrawer } from "@/components/organisms/CartDrawer";
 import { Footer } from "@/components/organisms/Footer";
+import { AnimatePresenceWrapper } from "@/components/animations/AnimatePresenceWrapper";
 
 /* ── Font Declarations ──────────────────────────────────────── */
 // Primary sans-serif — body text and headings
@@ -92,7 +93,9 @@ export default function RootLayout({
 
         {/* Page content */}
         <main id="main-content" tabIndex={-1} className="outline-none">
-          {children}
+          <AnimatePresenceWrapper>
+            {children}
+          </AnimatePresenceWrapper>
         </main>
 
         {/* Site footer */}

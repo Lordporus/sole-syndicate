@@ -103,7 +103,7 @@ export function HeroSection() {
 
       {/* ── Main content — fades/rises on scroll ── */}
       <motion.div
-        className="relative z-20 flex flex-col items-center text-center gap-8 px-md w-full max-w-4xl mx-auto"
+        className="relative z-20 flex flex-col items-center text-center px-6 md:px-10 lg:px-16 w-full max-w-[1440px] mx-auto"
         style={{
           opacity: reduced ? 1 : contentOpacity,
           y: reduced ? 0 : contentY,
@@ -114,6 +114,7 @@ export function HeroSection() {
           initial={{ opacity: 0, letterSpacing: '0.4em' }}
           animate={{ opacity: 1, letterSpacing: '0.25em' }}
           transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+          className="mb-8"
         >
           <MonoLabel muted className="text-xs tracking-[0.3em] uppercase">
             Est. 2024 · Authenticated Pairs
@@ -127,7 +128,7 @@ export function HeroSection() {
           initial="hidden"
           animate="show"
           aria-label="SYNDICATE"
-          className="font-display text-[clamp(4rem,16vw,10rem)] leading-none text-primary relative"
+          className="font-display text-[32px] md:text-[48px] lg:text-[72px] leading-none tracking-tight text-primary relative mb-8"
           style={{ perspective: '600px' }}
         >
           {TITLE.split('').map((char, i) => (
@@ -144,20 +145,20 @@ export function HeroSection() {
 
         {/* Subtitle */}
         <motion.p
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: reduced ? 0 : 1.6 }}
-          className="font-serif italic text-lg md:text-xl text-secondary max-w-sm leading-relaxed"
+          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1], delay: reduced ? 0 : 1.6 }}
+          className="font-serif italic text-lg md:text-xl text-secondary max-w-[640px] leading-[30px] mb-8"
         >
           The rarest pairs. Presented properly.
         </motion.p>
 
         {/* CTA */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: reduced ? 0 : 2.0 }}
-          className="flex items-center gap-6 mt-2"
+          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1], delay: reduced ? 0 : 2.0 }}
+          className="flex items-center gap-6 mb-14"
         >
           <Link href="/collections">
             <Button variant="gold" size="lg">

@@ -30,6 +30,7 @@ const GOLD_DIM = new THREE.Color('#8a6f22');
 /* ── 1. Particle Field ──────────────────────── */
 function GoldParticleField({ count = 1500, reduced }: { count?: number; reduced: boolean }) {
   const ref = useRef<THREE.Points>(null);
+  const timer = useRef(new THREE.Timer());
 
   // Build particle positions in a galaxy/disc spread
   const [positions, velocities] = useMemo(() => {
@@ -57,9 +58,10 @@ function GoldParticleField({ count = 1500, reduced }: { count?: number; reduced:
     return g;
   }, [positions]);
 
-  useFrame(({ clock }) => {
+  useFrame(() => {
     if (reduced || !ref.current) return;
-    const t = clock.getElapsedTime();
+    timer.current.update();
+    const t = timer.current.getElapsed();
     const posAttr = ref.current.geometry.attributes.position as THREE.BufferAttribute;
     for (let i = 0; i < count; i++) {
       const speed = velocities[i * 3 + 2];
@@ -88,10 +90,12 @@ function GoldParticleField({ count = 1500, reduced }: { count?: number; reduced:
 function SneakerPedestal({ reduced }: { reduced: boolean }) {
   const gemRef = useRef<THREE.Mesh>(null);
   const discRef = useRef<THREE.Mesh>(null);
+  const timer = useRef(new THREE.Timer());
 
-  useFrame(({ clock }) => {
+  useFrame(() => {
     if (reduced) return;
-    const t = clock.getElapsedTime();
+    timer.current.update();
+    const t = timer.current.getElapsed();
     if (gemRef.current) {
       // Float up and down
       gemRef.current.position.y = Math.sin(t * 0.7) * 0.12;
@@ -157,15 +161,17 @@ function CameraRig({ reduced }: { reduced: boolean }) {
   const { camera } = useThree();
   const mouse = useRef({ x: 0, y: 0 });
   const target = useRef(new THREE.Vector3(0, 0, 5));
+  const timer = useRef(new THREE.Timer());
 
   // Track mouse globally
   if (typeof window !== 'undefined') {
     // Safe — only in useEffect inside Canvas but we capture once here
   }
 
-  useFrame(({ pointer, clock }) => {
+  useFrame(({ pointer }) => {
     if (reduced) return;
-    const t = clock.getElapsedTime();
+    timer.current.update();
+    const t = timer.current.getElapsed();
 
     // pointer is already -1..1 in R3F
     mouse.current.x = pointer.x;

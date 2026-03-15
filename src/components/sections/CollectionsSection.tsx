@@ -14,21 +14,21 @@ import { MOCK_PRODUCTS } from '@/lib/mockData';
 
 export function CollectionsSection() {
   return (
-    <section aria-labelledby="collections-heading" className="py-4xl overflow-hidden">
+    <section aria-labelledby="collections-heading" className="py-28 overflow-hidden">
       {/* Section header */}
-      <div className="px-md md:px-xl flex items-end justify-between mb-2xl">
+      <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 flex items-end justify-between mb-2xl">
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-10%' }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
         >
-          <MonoLabel muted className="block mb-sm">
+          <MonoLabel muted className="block mb-8">
             Current Selection
           </MonoLabel>
           <h2
             id="collections-heading"
-            className="font-sans font-semibold text-3xl md:text-4xl text-primary tracking-tight"
+            className="font-display text-[32px] md:text-[48px] lg:text-[72px] leading-none tracking-tight text-primary mb-6"
           >
             The Archive
           </h2>
@@ -43,7 +43,7 @@ export function CollectionsSection() {
 
       {/* ── Desktop: horizontal scroll strip with snap ── */}
       <div
-        className="hidden md:flex gap-lg overflow-x-auto scrollbar-hide px-md md:px-xl pb-sm"
+        className="hidden md:flex gap-10 overflow-x-auto scrollbar-hide px-6 md:px-10 lg:px-16 pb-sm max-w-[1440px] mx-auto"
         style={{ scrollSnapType: 'x mandatory' }}
       >
         {MOCK_PRODUCTS.map((product, i) => (
@@ -62,11 +62,11 @@ export function CollectionsSection() {
       </div>
 
       {/* ── Mobile: 2-col grid ── */}
-      <div className="grid grid-cols-2 gap-md px-md md:hidden">
+      <div className="grid grid-cols-2 gap-6 px-6 md:px-10 lg:px-16 md:hidden max-w-[1440px] mx-auto">
         {MOCK_PRODUCTS.slice(0, 6).map((product, i) => (
           <motion.div
             key={product.id}
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: i * 0.06 }}
@@ -77,7 +77,7 @@ export function CollectionsSection() {
       </div>
 
       {/* Mobile view-all link */}
-      <div className="mt-xl px-md md:hidden">
+      <div className="mt-xl px-6 md:px-10 lg:px-16 md:hidden max-w-[1440px] mx-auto">
         <a
           href="/collections"
           className="text-mono-label text-gold hover:text-gold-dim transition-colors duration-fast"

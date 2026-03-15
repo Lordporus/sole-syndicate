@@ -27,26 +27,26 @@ export function CtaSection() {
   return (
     <section
       aria-labelledby="cta-heading"
-      className="py-5xl px-md md:px-xl bg-void border-t border-border"
+      className="py-20 px-6 md:px-10 lg:px-16 w-full max-w-[1440px] mx-auto bg-void border-t border-border"
     >
       <div className="max-w-xl mx-auto text-center">
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-10%' }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-col items-center gap-lg"
         >
-          <MonoLabel muted>The drop list</MonoLabel>
+          <MonoLabel muted className="mb-8">The drop list</MonoLabel>
 
           <h2
             id="cta-heading"
-            className="font-display text-4xl md:text-6xl text-primary"
+            className="font-display text-[32px] md:text-[48px] lg:text-[72px] leading-none tracking-tight text-primary mb-6"
           >
             NO NOISE.
           </h2>
 
-          <p className="font-serif italic text-secondary text-lg">
+          <p className="font-serif italic text-secondary text-lg leading-[30px] max-w-[640px] mx-auto mb-8">
             First to know. No spam. Unsubscribe any time.
           </p>
 

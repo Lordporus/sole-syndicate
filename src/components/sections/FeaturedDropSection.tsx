@@ -121,13 +121,13 @@ export function FeaturedDropSection() {
         <div className="absolute inset-x-0 bottom-0 h-48 bg-linear-to-t from-void to-transparent" />
       </motion.div>
 
-      {/* Content */}
-      <div className="relative z-10 px-md md:px-xl py-5xl max-w-3xl">
+      {/* Content overlay */}
+      <div className="relative z-10 px-6 md:px-10 lg:px-16 py-32 w-full max-w-[1440px] mx-auto flex flex-col items-start justify-center h-full">
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-15%' }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-col gap-lg"
         >
           {/* Live drop badge */}
@@ -143,7 +143,7 @@ export function FeaturedDropSection() {
           <div>
             <h2
               id="drop-heading"
-              className="font-display text-5xl md:text-7xl text-primary leading-none mb-sm"
+              className="font-display text-[32px] md:text-[48px] lg:text-[72px] leading-none tracking-tight text-primary mb-6"
             >
               {MOCK_FEATURED_DROP.productName}
             </h2>

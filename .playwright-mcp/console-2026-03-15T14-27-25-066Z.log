@@ -1,0 +1,2 @@
+[  189262ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://sole-syndicate-lac.vercel.app/size-guide:0
+[  202413ms] [WARNING] The resource https://sole-syndicate-lac.vercel.app/_next/static/media/01e4147cff8141ee-s.p.7787e134.woff2 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ https://sole-syndicate-lac.vercel.app/product/jordan-1-chicago-2024:0

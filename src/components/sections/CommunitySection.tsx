@@ -63,7 +63,7 @@ export function CommunitySection() {
   return (
     <aside
       aria-labelledby="syndicate-heading"
-      className="py-4xl bg-surface border-t border-border overflow-hidden"
+      className="py-28 bg-surface border-t border-border overflow-hidden"
     >
       {/* ── Live ticker strip ── */}
       <div
@@ -87,22 +87,22 @@ export function CommunitySection() {
         </motion.div>
       </div>
 
-      {/* ── Main content ── */}
-      <div className="px-md md:px-xl">
+      {/* Section Content */}
+      <div className="px-6 md:px-10 lg:px-16 w-full max-w-[1440px] mx-auto">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-10%' }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
           className="max-w-2xl mb-3xl"
         >
-          <MonoLabel muted className="block mb-md">
+          <MonoLabel muted className="block mb-8">
             Members Only
           </MonoLabel>
           <h2
             id="syndicate-heading"
-            className="font-display text-5xl md:text-6xl text-primary mb-lg"
+            className="font-display text-[32px] md:text-[48px] lg:text-[72px] leading-none tracking-tight text-primary mb-6"
           >
             THE SYNDICATE
           </h2>
@@ -117,10 +117,10 @@ export function CommunitySection() {
           {TIERS.map((tier, i) => (
             <motion.article
               key={tier.name}
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.4, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
               className={`relative flex flex-col p-lg border rounded-card transition-shadow duration-normal ${
                 tier.featured
                   ? 'bg-void border-gold shadow-glow-gold'

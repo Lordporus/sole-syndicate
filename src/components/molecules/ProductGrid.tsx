@@ -39,7 +39,7 @@ export function ProductGrid({ products, wide = false, className }: ProductGridPr
     <section
       aria-label="Product grid"
       className={clsx(
-        'grid gap-md md:gap-lg',
+        'grid gap-6 lg:gap-10',
         // Column layout
         'grid-cols-2',
         wide ? 'lg:grid-cols-3 xl:grid-cols-4' : 'lg:grid-cols-3',

@@ -5,6 +5,8 @@ import { Button } from '@/components/atoms/Button';
 import { MonoLabel } from '@/components/atoms/MonoLabel';
 import { Users, ShieldCheck, Globe } from 'lucide-react';
 
+const BLUR_DATA_URL = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM8c+bMfwAJoAHwov6H3gAAAABJRU5ErkJggg==';
+
 /* ─────────────────────────────────────────────
    About Page
    ───────────────────────────────────────────── */
@@ -63,7 +65,10 @@ export default function AboutPage() {
                alt="Air Jordan 1 Chicago detail — editorial close-up"
                fill
                sizes="(max-width: 768px) 100vw, 50vw"
-               className="object-cover opacity-75"
+               placeholder="blur"
+               blurDataURL={BLUR_DATA_URL}
+               loading="lazy"
+               className="object-cover opacity-75 transition-opacity duration-300"
              />
              <div className="absolute inset-0 border border-gold/20 pointer-events-none" aria-hidden="true" />
           </div>

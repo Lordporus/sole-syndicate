@@ -6,6 +6,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/atoms/Button';
 
+const BLUR_DATA_URL = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM8c+bMfwAJoAHwov6H3gAAAABJRU5ErkJggg==';
+
 export const metadata: Metadata = {
   title: 'Sneaker Drops | Sole Syndicate',
   description: 'Upcoming and recent sneaker releases, highly curated, authenticated, and secured.',
@@ -76,7 +78,9 @@ export default async function DropsPage() {
                   alt={`Release photo of ${featured.brand} ${featured.model}`}
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover transition-transform duration-slow group-hover:scale-105"
+                  placeholder="blur"
+                  blurDataURL={BLUR_DATA_URL}
+                  className="object-cover transition-all duration-300 group-hover:scale-105"
                   priority
                 />
               </div>

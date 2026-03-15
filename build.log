@@ -1,0 +1,30 @@
+▲ Next.js 16.1.6 (Turbopack)
+
+  Creating an optimized production build ...
+
+> Build error occurred
+Error: Turbopack build failed with 1 errors:
+./src/components/three/Hero3D.tsx:9:1
+Module not found: Can't resolve 'three/addons/misc/Timer.js'
+   7 | import * as THREE from 'three';
+   8 | // @ts-expect-error - Timer type definition might be missing in older @types/three
+>  9 | import { Timer } from 'three/addons/misc/Timer.js';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import { Suspense } from 'react';
+  11 | import { useReducedMotion } from '@/lib/hooks/useReducedMotion';
+  12 |
+
+
+
+Import trace:
+  Client Component Browser:
+    ./src/components/three/Hero3D.tsx [Client Component Browser]
+    ./src/components/sections/HeroSection.tsx [Client Component Browser]
+    ./src/components/sections/HeroSection.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (./src/components/three/Hero3D.tsx:9:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)

@@ -105,6 +105,7 @@ export function ProductDetailClient({ product }: Props) {
             <ProductGallery
               images={product.images}
               productName={`${product.model} ${product.colorway}`}
+              productSlug={product.slug}
             />
           </motion.div>
 
@@ -126,7 +127,7 @@ export function ProductDetailClient({ product }: Props) {
 
             {/* Product name */}
             <div>
-              <h1 className="font-display text-4xl md:text-5xl text-primary leading-tight mb-sm">
+              <h1 className="font-display text-[40px] md:text-[48px] font-medium leading-[1.1] tracking-tight text-primary mb-6">
                 {product.model}
               </h1>
               <MonoLabel muted className="text-base">{product.colorway}</MonoLabel>
@@ -179,8 +180,8 @@ export function ProductDetailClient({ product }: Props) {
                       selectedSize === size
                         ? 'bg-gold text-void border-gold'
                         : sizeError
-                        ? 'bg-transparent text-primary border-drop hover:border-gold'
-                        : 'bg-transparent text-primary border-border hover:border-gold'
+                          ? 'bg-transparent text-primary border-drop hover:border-gold'
+                          : 'bg-transparent text-primary border-border hover:border-gold'
                     )}
                   >
                     {size}
@@ -199,8 +200,8 @@ export function ProductDetailClient({ product }: Props) {
                   added
                     ? 'Added to cart'
                     : selectedSize
-                    ? `Add size US ${selectedSize} to cart`
-                    : 'Add to cart — select size first'
+                      ? `Add size US ${selectedSize} to cart`
+                      : 'Add to cart — select size first'
                 }
                 className="flex-1 flex items-center justify-center gap-sm"
               >

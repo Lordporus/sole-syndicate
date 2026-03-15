@@ -50,15 +50,14 @@ export function Navbar() {
         aria-label="Main navigation"
         className={clsx(
           'fixed top-0 inset-x-0 z-50',
-          'flex items-center justify-between',
-          'px-md md:px-xl',
-          'h-16', // 64px — 8x grid
           'transition-all duration-normal motion-reduce:transition-none',
           isScrolled
-            ? 'bg-surface/90 backdrop-blur-md border-b border-border'
-            : 'bg-transparent'
+            ? 'bg-surface/90 backdrop-blur-md border-b border-border py-6'
+            : 'bg-transparent py-6'
         )}
       >
+        {/* ── Inner Container ── */}
+        <div className="flex items-center justify-between max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 w-full">
         {/* ── Logo ── */}
         <div className="flex-1 flex justify-start">
           <Link
@@ -117,6 +116,7 @@ export function Navbar() {
           >
             {isMobileMenuOpen ? <X size={20} aria-hidden="true" /> : <Menu size={20} aria-hidden="true" />}
           </button>
+        </div>
         </div>
       </nav>
 

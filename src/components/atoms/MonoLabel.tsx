@@ -26,8 +26,8 @@ export function MonoLabel({
   return (
     <Tag
       className={clsx(
-        'text-mono-label',
-        muted ? 'text-secondary' : 'text-primary',
+        'uppercase tracking-[0.2em]',
+        muted ? 'text-secondary opacity-80' : 'text-primary opacity-90',
         className
       )}
     >
@@ -48,9 +48,9 @@ interface PriceDisplayProps {
 }
 
 const sizeMap = {
-  sm: 'text-base',
+  sm: 'text-lg',
   md: 'text-xl',
-  lg: 'text-4xl font-medium',
+  lg: 'text-[32px] md:text-[40px] font-medium tracking-tight',
 };
 
 export function PriceDisplay({ priceUsd, size = 'md', className }: PriceDisplayProps) {

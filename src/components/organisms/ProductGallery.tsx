@@ -7,6 +7,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { clsx } from 'clsx';
 import type { ProductImage } from '@/lib/types';
 
+const BLUR_DATA_URL = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM8c+bMfwAJoAHwov6H3gAAAABJRU5ErkJggg==';
+
 /* ─────────────────────────────────────────────
    ProductGallery — Image carousel + thumbnail strip.
 
@@ -23,9 +25,10 @@ import type { ProductImage } from '@/lib/types';
 interface ProductGalleryProps {
   images: ProductImage[];
   productName: string;
+  productSlug: string;
 }
 
-export function ProductGallery({ images, productName }: ProductGalleryProps) {
+export function ProductGallery({ images, productName, productSlug }: ProductGalleryProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [direction, setDirection] = useState<1 | -1>(1);
 
@@ -61,6 +64,7 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
         <AnimatePresence initial={false} custom={direction}>
           <motion.div
             key={activeIndex}
+            layoutId={activeIndex === 0 ? `product-image-${productSlug}` : undefined}
             custom={direction}
             initial={{ opacity: 0, x: direction * 40 }}
             animate={{ opacity: 1, x: 0 }}
@@ -73,7 +77,9 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
               alt={currentImage.alt}
               fill
               sizes="(max-width: 768px) 100vw, 60vw"
-              className="object-contain p-xl"
+              placeholder="blur"
+              blurDataURL={BLUR_DATA_URL}
+              className="object-contain p-xl transition-opacity duration-300"
               priority={activeIndex === 0}
             />
           </motion.div>
@@ -143,7 +149,10 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
                 alt=""
                 fill
                 sizes="64px"
-                className="object-contain p-xs bg-void"
+                placeholder="blur"
+                blurDataURL={BLUR_DATA_URL}
+                loading="lazy"
+                className="object-contain p-xs bg-void transition-opacity duration-300"
               />
             </button>
           ))}
