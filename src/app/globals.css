@@ -1,26 +1,154 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ============================================================
+   SOLE SYNDICATE — Design Tokens via CSS Variables
+   All colors, shadows, and motion values must flow through here.
+   Never hardcode hex values in components.
+   ============================================================ */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
+  /* Dark Luxury — Default Theme */
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* Backgrounds */
+    --color-void: #080808;     /* Near-black — base of everything */
+    --color-surface: #111111;  /* Card backgrounds, elevated panels */
+    --color-border: #1e1e1e;   /* Subtle separators */
+    --color-muted: #3d3d3d;    /* Disabled states, captions */
+
+    /* Text */
+    --color-primary: #f5f5f0;  /* Main body text — warm white */
+    --color-secondary: #9a9a8a; /* Secondary text — warm grey */
+
+    /* Brand Accent */
+    --color-gold: #c5a43a;     /* Premium signifier, drop badges, CTAs */
+    --color-gold-dim: #8a7128; /* Hover state for gold elements */
+
+    /* Semantic */
+    --color-drop: #ff4b4b;     /* Live drop indicator */
+    --color-verified: #3dba6f; /* Authentication confirmed */
+    --color-scarce: #f59e0b;   /* Low stock warning */
+
+    /* Motion */
+    --motion-instant: 80ms ease-out;
+    --motion-fast: 150ms ease-out;
+    --motion-normal: 280ms cubic-bezier(0.25, 0.1, 0.25, 1);
+    --motion-slow: 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+    --motion-cinematic: 1200ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Light Mode Override */
+  .theme-light {
+    --color-void: #f0ede8;
+    --color-surface: #ffffff;
+    --color-border: #e5e5e5;
+    --color-muted: #a3a3a3;
+    --color-primary: #0a0a0a;
+    --color-secondary: #525252;
+    --color-gold: #a58022;
+    --color-gold-dim: #c5a43a;
+    --color-drop: #dc2626;
+    --color-verified: #16a34a;
+    --color-scarce: #d97706;
+  }
+
+  /* Base Body Styles */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-void);
+    color: var(--color-primary);
+    font-family: var(--font-sans, system-ui, sans-serif);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* ── Accessibility: Focus Indicators ── */
+  /* Gold outline — brand-consistent, 3px, 2px offset */
+  :focus-visible {
+    outline: 3px solid var(--color-gold);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Text selection uses gold/void pairing */
+  ::selection {
+    background-color: var(--color-gold);
+    color: var(--color-void);
+  }
+
+  /* ── Accessibility: Reduced Motion ── */
+  /* All transitions and animations disabled if user prefers it */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* ── Typography baseline ── */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-sans, system-ui, sans-serif);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  p {
+    line-height: 1.7;
+  }
+
+  /* ── Scrollbar ── */
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ============================================================
+   TYPOGRAPHY UTILITIES
+   ============================================================ */
+@layer utilities {
+  .text-display {
+    font-family: var(--font-display, sans-serif);
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .text-mono-label {
+    font-family: var(--font-mono, monospace);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+
+  .text-accent-serif {
+    font-family: var(--font-serif, Georgia, serif);
+    font-style: italic;
+    font-weight: 300;
+  }
+
+  /* Animated border gradient for gold elements */
+  .border-gold-gradient {
+    border: 1px solid transparent;
+    background-clip: padding-box;
+    position: relative;
+  }
+  .border-gold-gradient::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, var(--color-gold), transparent 60%);
+    z-index: -1;
+  }
 }
