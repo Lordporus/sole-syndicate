@@ -39,10 +39,10 @@ const coreValues = [
 
 export default function AboutPage() {
   return (
-    <main id="main-content" className="min-h-screen bg-void pt-32 pb-24">
-      {/* Container: max-w-6xl aligned to token system */}
-      <div className="max-w-6xl mx-auto px-md md:px-xl">
-        
+    <main id="main-content" className="min-h-screen bg-void">
+      {/* Container: max-w-7xl mx-auto px-8 py-32 */}
+      <div className="max-w-7xl mx-auto px-8 py-32">
+
         {/* ── Hero Section ── */}
         <section className="mb-24 flex flex-col items-center text-center">
           <MonoLabel className="text-gold tracking-widest uppercase mb-sm">Our Philosophy</MonoLabel>
@@ -51,43 +51,43 @@ export default function AboutPage() {
             <span className="text-secondary italic font-serif">A Vested Asset.</span>
           </h1>
           <p className="max-w-2xl text-secondary text-lg leading-relaxed">
-            Sole Syndicate was founded on a singular premise: sneakers are modern art. 
-            We provide a sanctuary for collectors who demand absolute authenticity, 
+            Sole Syndicate was founded on a singular premise: sneakers are modern art.
+            We provide a sanctuary for collectors who demand absolute authenticity,
             white-glove service, and access to the rarest silhouettes in existence.
           </p>
         </section>
 
         {/* ── Brand Story ── */}
-        <section className="mb-24 grid grid-cols-1 md:grid-cols-2 gap-2xl items-center">
-          <div className="aspect-4/5 bg-surface border border-border relative overflow-hidden">
-             <Image
-               src="/images/sneakers/air-jordan-1-chicago/zoomedin.webp"
-               alt="Air Jordan 1 Chicago detail — editorial close-up"
-               fill
-               sizes="(max-width: 768px) 100vw, 50vw"
-               placeholder="blur"
-               blurDataURL={BLUR_DATA_URL}
-               loading="lazy"
-               className="object-cover opacity-75 transition-opacity duration-300"
-             />
-             <div className="absolute inset-0 border border-gold/20 pointer-events-none" aria-hidden="true" />
+        <section className="mb-24 flex flex-col md:flex-row gap-16 md:gap-20 items-center">
+          <div className="w-full md:w-[50%] lg:w-[55%] aspect-4/5 relative rounded-xl shadow-[0_40px_120px_rgba(0,0,0,0.6)] overflow-hidden group">
+            <Image
+              src="/images/sneakers/air-jordan-1-chicago/zoomedin.webp"
+              alt="Air Jordan 1 Chicago detail — editorial close-up"
+              fill
+              sizes="(max-width: 768px) 100vw, 55vw"
+              placeholder="blur"
+              blurDataURL={BLUR_DATA_URL}
+              loading="lazy"
+              className="object-cover opacity-90 transition-transform duration-600ms ease-out group-hover:scale-[1.03]"
+            />
+            <div className="absolute inset-0 border border-gold/10 rounded-xl pointer-events-none" aria-hidden="true" />
           </div>
-          <div className="flex flex-col gap-lg">
-            <h2 className="font-display text-4xl text-primary">The Genesis</h2>
-            <div className="space-y-md text-secondary leading-relaxed">
-              <p>
-                Before Sole Syndicate, the secondary market was a gamble. Collectors spent as much time 
-                verifying their purchases as they did enjoying them. We saw a fractured landscape lacking 
+          <div className="w-full md:w-[50%] lg:w-[45%] flex flex-col opacity-0 translate-y-5 animate-[fadeInUp_0.6s_ease-out_0.2s_forwards]">
+            <h2 className="font-display text-[48px] md:text-[64px] tracking-tight leading-none text-primary mb-8">The Genesis</h2>
+            <div className="text-[18px] leading-relaxed max-w-[520px] text-secondary">
+              <p className="mb-6">
+                Before Sole Syndicate, the secondary market was a gamble. Collectors spent as much time
+                verifying their purchases as they did enjoying them. We saw a fractured landscape lacking
                 the premium trust required for high-stakes transactions.
               </p>
-              <p>
-                In 2024, an alliance of industry veterans, authentication specialists, and lifelong 
-                collectors formed the Syndicate. Our objective was not to build another marketplace—it 
+              <p className="mb-6">
+                In 2024, an alliance of industry veterans, authentication specialists, and lifelong
+                collectors formed the Syndicate. Our objective was not to build another marketplace—it
                 was to architect an institution.
               </p>
-              <p>
-                Today, every pair that passes through our doors is treated with archival reverence. 
-                We have eliminated the uncertainty of the aftermarket, replacing it with a guarantee 
+              <p className="mb-6">
+                Today, every pair that passes through our doors is treated with archival reverence.
+                We have eliminated the uncertainty of the aftermarket, replacing it with a guarantee
                 backed by elite expertise.
               </p>
             </div>
@@ -115,8 +115,8 @@ export default function AboutPage() {
         <section className="mb-24 bg-surface border border-border py-4xl px-md text-center">
           <h2 className="font-display text-3xl text-primary mb-md">Built entirely for the culture.</h2>
           <p className="max-w-xl mx-auto text-secondary leading-relaxed mb-xl">
-            We are not just facilitating transactions; we are archiving history. 
-            The Syndicate is a closed-loop ecosystem of individuals who recognize that 
+            We are not just facilitating transactions; we are archiving history.
+            The Syndicate is a closed-loop ecosystem of individuals who recognize that
             what you wear tells the story of who you are.
           </p>
           <div className="flex justify-center flex-wrap gap-md">

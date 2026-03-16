@@ -94,7 +94,7 @@ export function Footer() {
                     <li key={link.href}>
                       <Link
                         href={link.href}
-                        className="font-sans text-sm text-secondary hover:text-primary transition-colors duration-fast motion-reduce:transition-none"
+                        className="font-sans text-sm text-secondary hover:text-primary hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded-sm transition-all duration-fast motion-reduce:transition-none block w-fit"
                       >
                         {link.label}
                       </Link>

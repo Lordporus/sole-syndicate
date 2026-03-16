@@ -60,7 +60,7 @@ export function CartDrawer() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm"
+            className="fixed inset-0 z-50 bg-black/80 backdrop-blur-lg"
             onClick={closeCart}
             aria-hidden="true"
           />
@@ -79,7 +79,7 @@ export function CartDrawer() {
               'w-full md:w-[420px]',
               'bg-surface border-l border-border',
               'flex flex-col',
-              'shadow-lifted'
+              'shadow-2xl'
             )}
           >
             {/* ── Header ── */}

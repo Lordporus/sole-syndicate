@@ -103,7 +103,7 @@ export function HeroSection() {
 
       {/* ── Main content — fades/rises on scroll ── */}
       <motion.div
-        className="relative z-20 flex flex-col items-center text-center px-6 md:px-10 lg:px-16 w-full max-w-[1440px] mx-auto"
+        className="relative z-20 flex flex-col items-center text-center px-6 md:px-10 lg:px-16 w-full max-w-[1440px] mx-auto will-change-transform"
         style={{
           opacity: reduced ? 1 : contentOpacity,
           y: reduced ? 0 : contentY,
@@ -145,8 +145,8 @@ export function HeroSection() {
 
         {/* Subtitle */}
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, scale: 0.98 }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1], delay: reduced ? 0 : 1.6 }}
           className="font-serif italic text-lg md:text-xl text-secondary max-w-[640px] leading-[30px] mb-8"
         >
@@ -155,8 +155,8 @@ export function HeroSection() {
 
         {/* CTA */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, scale: 0.98 }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1], delay: reduced ? 0 : 2.0 }}
           className="flex items-center gap-6 mb-14"
         >

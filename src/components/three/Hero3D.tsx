@@ -1,10 +1,11 @@
 'use client';
 
-import { useRef, useMemo } from 'react';
+import { useRef, useState, useMemo } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Environment, MeshDistortMaterial, Float, Stars } from '@react-three/drei';
 import * as THREE from 'three';
 import { Suspense } from 'react';
+import { useInView } from 'framer-motion';
 import { useReducedMotion } from '@/lib/hooks/useReducedMotion';
 
 /* ─────────────────────────────────────────────
@@ -33,7 +34,7 @@ function GoldParticleField({ count = 1500, reduced }: { count?: number; reduced:
   const timer = useRef(new THREE.Timer());
 
   // Build particle positions in a galaxy/disc spread
-  const [positions, velocities] = useMemo(() => {
+  const [[positions, velocities]] = useState(() => {
     const pos = new Float32Array(count * 3);
     const vel = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) {
@@ -50,7 +51,7 @@ function GoldParticleField({ count = 1500, reduced }: { count?: number; reduced:
       vel[i * 3 + 2] = 0.2 + Math.random() * 0.4;   // drift speed
     }
     return [pos, vel];
-  }, [count]);
+  });
 
   const geo = useMemo(() => {
     const g = new THREE.BufferGeometry();
@@ -258,18 +259,21 @@ function SceneFallback() {
 /* ── 6. Root component exported dynamically ─── */
 export default function Hero3D() {
   const reduced = useReducedMotion();
+  const containerRef = useRef<HTMLDivElement>(null);
+  const inView = useInView(containerRef);
 
   return (
-    <div className="absolute inset-0" aria-hidden="true">
+    <div ref={containerRef} className="absolute inset-0" aria-hidden="true">
       <Suspense fallback={<SceneFallback />}>
         <Canvas
+          frameloop={inView && !reduced ? 'always' : 'never'}
           camera={{ position: [0, 0, 5], fov: 50, near: 0.1, far: 100 }}
           gl={{
             antialias: true,
             alpha: true,
             powerPreference: 'high-performance',
           }}
-          dpr={[1, Math.min(2, typeof window !== 'undefined' ? window.devicePixelRatio : 2)]}
+          dpr={[1, Math.min(1.5, typeof window !== 'undefined' ? window.devicePixelRatio : 1.5)]}
           style={{ background: 'transparent' }}
         >
           <HeroScene reduced={reduced} />

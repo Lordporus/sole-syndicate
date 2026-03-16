@@ -73,7 +73,7 @@ export default function RootLayout({
       // Dark mode is default — 'theme-light' class can be toggled via JS
       className={`${inter.variable} ${jetbrainsMono.variable} ${cormorantGaramond.variable}`}
     >
-      <body className="bg-void text-primary antialiased min-h-screen">
+      <body className="bg-void text-primary antialiased min-h-screen flex flex-col">
         {/* 
           Skip link for keyboard/screen reader users — WCAG 2.4.1 compliance.
           Must be the first interactive element in the DOM. 
@@ -92,10 +92,10 @@ export default function RootLayout({
         <CartDrawer />
 
         {/* Page content */}
-        <main id="main-content" tabIndex={-1} className="outline-none">
-          <AnimatePresenceWrapper>
-            {children}
-          </AnimatePresenceWrapper>
+        <main id="main-content" tabIndex={-1} className="outline-none flex-1 flex flex-col w-full">
+            <AnimatePresenceWrapper>
+              {children}
+            </AnimatePresenceWrapper>
         </main>
 
         {/* Site footer */}

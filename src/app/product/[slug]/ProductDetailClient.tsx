@@ -94,7 +94,7 @@ export function ProductDetailClient({ product }: Props) {
 
       {/* ── Main layout: Gallery | Info panel ── */}
       <div className="px-md md:px-xl py-2xl">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-2xl lg:gap-3xl max-w-screen-xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-2xl lg:gap-3xl max-w-7xl mx-auto">
 
           {/* ── LEFT: Gallery ── */}
           <motion.div
@@ -209,7 +209,16 @@ export function ProductDetailClient({ product }: Props) {
                 {added ? 'Added to Cart ✓' : 'Add to Cart'}
               </Button>
 
-              <Button variant="ghost" size="lg" className="sm:w-auto">
+              <Button
+                variant="ghost"
+                size="lg"
+                className="sm:w-auto cursor-not-allowed opacity-70"
+                aria-disabled="true"
+                onClick={(e) => {
+                  e.preventDefault();
+                  alert('Drop notifications coming soon.');
+                }}
+              >
                 Notify Me
               </Button>
             </div>

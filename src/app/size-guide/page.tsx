@@ -18,14 +18,14 @@ export default function SizeGuidePage() {
           Size Guide
         </h1>
         <p className="text-secondary mb-8 leading-relaxed">
-          Sneaker sizing can vary wildly between brands and even specific models. 
+          Sneaker sizing can vary wildly between brands and even specific models.
           Our comprehensive sizing charts are being updated to reflect the latest fits.
         </p>
-        
+
         <div className="bg-surface border border-border p-8 mb-8 text-left">
           <h3 className="font-display text-xl text-primary mb-4">Coming Soon</h3>
           <p className="text-secondary text-sm">
-            We're compiling detailed, authenticated fit data for Jordan, Nike, New Balance, and luxury designers. 
+            We&apos;re compiling detailed, authenticated fit data for Jordan, Nike, New Balance, and luxury designers.
             Check back shortly for the full reference guide.
           </p>
         </div>

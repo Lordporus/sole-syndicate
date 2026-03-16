@@ -9,7 +9,7 @@ export function AnimatePresenceWrapper({ children }: { children: React.ReactNode
   // The motion.div with key={pathname} forces AnimatePresence to detect route exits
   return (
     <AnimatePresence mode="wait">
-      <motion.div key={pathname} className="flex-1 flex flex-col min-h-screen">
+      <motion.div key={pathname} className="flex-1 flex flex-col w-full">
         {children}
       </motion.div>
     </AnimatePresence>

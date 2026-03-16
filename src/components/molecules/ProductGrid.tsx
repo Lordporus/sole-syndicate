@@ -46,8 +46,8 @@ export function ProductGrid({ products, wide = false, className }: ProductGridPr
         className
       )}
     >
-      {products.map((product) => (
-        <SneakerCard key={product.id} product={product} />
+      {products.map((product, index) => (
+        <SneakerCard key={product.id} product={product} index={index} />
       ))}
     </section>
   );

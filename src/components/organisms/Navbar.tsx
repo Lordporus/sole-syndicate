@@ -5,7 +5,6 @@ import { useState, useEffect } from 'react';
 import { ShoppingBag, Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { clsx } from 'clsx';
-import { Button } from '@/components/atoms/Button';
 import { useCartStore } from '@/lib/store/cartStore';
 
 /* ─────────────────────────────────────────────
@@ -58,65 +57,65 @@ export function Navbar() {
       >
         {/* ── Inner Container ── */}
         <div className="flex items-center justify-between max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 w-full">
-        {/* ── Logo ── */}
-        <div className="flex-1 flex justify-start">
-          <Link
-            href="/"
-            className="font-display text-xl tracking-widest text-primary hover:text-gold transition-colors duration-fast motion-reduce:transition-none"
-            aria-label="Sole Syndicate — Home"
-          >
-            SOLE SYNDICATE
-          </Link>
-        </div>
+          {/* ── Logo ── */}
+          <div className="flex-1 flex justify-start">
+            <Link
+              href="/"
+              className="font-display text-xl tracking-widest text-primary hover:text-gold transition-colors duration-fast motion-reduce:transition-none"
+              aria-label="Sole Syndicate — Home"
+            >
+              SOLE SYNDICATE
+            </Link>
+          </div>
 
-        {/* ── Desktop Links ── */}
-        <ul
-          className="hidden md:flex flex-none items-center justify-center gap-8"
-          role="list"
-          aria-label="Site pages"
-        >
-          {navLinks.map((link) => (
-            <li key={link.href}>
-              <Link
-                href={link.href}
-                className="text-mono-label tracking-[0.25em] text-secondary hover:text-primary transition-colors duration-fast motion-reduce:transition-none"
-              >
-                {link.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-
-        {/* ── Right: Cart + Mobile Toggle ── */}
-        <div className="flex-1 flex items-center justify-end gap-sm">
-          {/* Cart Toggle */}
-          <button
-            onClick={openCart}
-            aria-label={`Open cart. ${cartCount} item${cartCount !== 1 ? 's' : ''}`}
-            className="relative flex items-center justify-center w-11 h-11 text-secondary hover:text-primary transition-colors duration-fast motion-reduce:transition-none"
+          {/* ── Desktop Links ── */}
+          <ul
+            className="hidden md:flex flex-none items-center justify-center gap-8"
+            role="list"
+            aria-label="Site pages"
           >
-            <ShoppingBag size={20} aria-hidden="true" />
-            {cartCount > 0 && (
-              <span
-                className="absolute -top-1 -right-1 flex items-center justify-center w-4 h-4 bg-gold text-void text-mono-label text-xs rounded-full font-bold"
-                aria-hidden="true"
-              >
-                {cartCount > 9 ? '9+' : cartCount}
-              </span>
-            )}
-          </button>
+            {navLinks.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className="text-mono-label tracking-[0.25em] text-secondary hover:text-primary hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded-sm transition-all duration-fast motion-reduce:transition-none block"
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
 
-          {/* Mobile Hamburger */}
-          <button
-            className="flex md:hidden items-center justify-center w-11 h-11 text-secondary hover:text-primary"
-            onClick={() => setIsMobileMenuOpen((v) => !v)}
-            aria-expanded={isMobileMenuOpen}
-            aria-controls="mobile-menu"
-            aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
-          >
-            {isMobileMenuOpen ? <X size={20} aria-hidden="true" /> : <Menu size={20} aria-hidden="true" />}
-          </button>
-        </div>
+          {/* ── Right: Cart + Mobile Toggle ── */}
+          <div className="flex-1 flex items-center justify-end gap-sm">
+            {/* Cart Toggle */}
+            <button
+              onClick={openCart}
+              aria-label={`Open cart. ${cartCount} item${cartCount !== 1 ? 's' : ''}`}
+              className="relative flex items-center justify-center w-11 h-11 text-secondary hover:text-primary transition-colors duration-fast motion-reduce:transition-none"
+            >
+              <ShoppingBag size={20} aria-hidden="true" />
+              {cartCount > 0 && (
+                <span
+                  className="absolute -top-1 -right-1 flex items-center justify-center w-4 h-4 bg-gold text-void text-mono-label text-xs rounded-full font-bold"
+                  aria-hidden="true"
+                >
+                  {cartCount > 9 ? '9+' : cartCount}
+                </span>
+              )}
+            </button>
+
+            {/* Mobile Hamburger */}
+            <button
+              className="flex md:hidden items-center justify-center w-11 h-11 text-secondary hover:text-primary"
+              onClick={() => setIsMobileMenuOpen((v) => !v)}
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-menu"
+              aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+            >
+              {isMobileMenuOpen ? <X size={20} aria-hidden="true" /> : <Menu size={20} aria-hidden="true" />}
+            </button>
+          </div>
         </div>
       </nav>
 
@@ -141,7 +140,7 @@ export function Navbar() {
                     <Link
                       href={link.href}
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className="font-display text-4xl text-primary hover:text-gold transition-colors duration-fast motion-reduce:transition-none"
+                      className="font-display text-4xl text-primary hover:text-gold hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded-sm transition-all duration-fast motion-reduce:transition-none block"
                     >
                       {link.label}
                     </Link>
@@ -149,9 +148,13 @@ export function Navbar() {
                 ))}
               </ul>
             </nav>
-            <Button variant="gold" size="lg" className="mt-xl">
+            <Link
+              href="/collections"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="mt-xl inline-flex items-center justify-center gap-sm transition-all duration-normal ease-brand-standard rounded-sm cursor-pointer select-none active:scale-[0.98] motion-reduce:transition-none bg-gold text-void border border-gold hover:bg-gold-dim hover:border-gold-dim focus-visible:ring-2 focus-visible:ring-gold text-base font-medium px-2xl min-h-14 tracking-wide"
+            >
               Enter Collection
-            </Button>
+            </Link>
           </motion.div>
         )}
       </AnimatePresence>

@@ -64,8 +64,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           'rounded-sm cursor-pointer select-none',
           'disabled:opacity-40 disabled:cursor-not-allowed',
           'motion-reduce:transition-none',
-          // Active press effect
-          'active:scale-[0.98]',
+          // Active hover/press effect
+          'hover:scale-[1.02] active:scale-[0.98]',
           variantStyles[variant],
           sizeStyles[size],
           className

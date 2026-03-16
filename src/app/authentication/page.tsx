@@ -1,6 +1,5 @@
 'use client';
 
-import type { Metadata } from 'next';
 import Link from 'next/link';
 import { useState, useId } from 'react';
 import { Button } from '@/components/atoms/Button';
@@ -109,6 +108,7 @@ function SignInForm() {
     const form = e.currentTarget;
     const email = (form.elements.namedItem('email') as HTMLInputElement).value;
     const password = (form.elements.namedItem('password') as HTMLInputElement).value;
+    void password;
 
     try {
       // TODO: wire Supabase auth
@@ -117,7 +117,7 @@ function SignInForm() {
       // router.push('/');
       console.log('Sign in:', { email, password: '***' });
       await new Promise((r) => setTimeout(r, 600)); // stub delay
-    } catch (err) {
+    } catch {
       setError('Invalid credentials. Please try again.');
     } finally {
       setIsLoading(false);

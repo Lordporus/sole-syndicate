@@ -1,6 +1,6 @@
 import { supabase } from '@/lib/supabaseClient';
 import { MOCK_PRODUCTS, MOCK_FEATURED_DROP } from '@/lib/mockData';
-import type { Product, Drop } from '@/lib/types';
+import type { Product } from '@/lib/types';
 
 /* ─────────────────────────────────────────────
    Products Service — Data access layer.
@@ -17,7 +17,7 @@ export async function getProducts(): Promise<Product[]> {
   try {
     const { data, error } = await supabase.from('products').select('*').order('created_at', { ascending: false });
     if (!error && data && data.length > 0) return data as Product[];
-  } catch (e) {
+  } catch {
     // Console log suppressed in production for clean fallback
   }
   return MOCK_PRODUCTS;
@@ -30,7 +30,7 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
   try {
     const { data, error } = await supabase.from('products').select('*').eq('slug', slug).single();
     if (!error && data) return data as Product;
-  } catch (e) {
+  } catch {
     // Fallback
   }
   return MOCK_PRODUCTS.find((p) => p.slug === slug) ?? null;
@@ -43,7 +43,7 @@ export async function getProductsByBrand(brand: string): Promise<Product[]> {
   try {
     const { data, error } = await supabase.from('products').select('*').ilike('brand', brand);
     if (!error && data && data.length > 0) return data as Product[];
-  } catch (e) {
+  } catch {
     // Fallback
   }
   return MOCK_PRODUCTS.filter((p) => p.brand.toLowerCase() === brand.toLowerCase());
@@ -56,7 +56,7 @@ export async function getAllProductSlugs(): Promise<string[]> {
   try {
     const { data, error } = await supabase.from('products').select('slug');
     if (!error && data) return data.map((d) => d.slug);
-  } catch (e) {
+  } catch {
     // Fallback
   }
   return MOCK_PRODUCTS.map((p) => p.slug);
@@ -79,7 +79,7 @@ export async function getDrops(): Promise<Product[]> {
   try {
     const { data, error } = await supabase.from('products').select('*').eq('drop_tag', 'upcoming').order('created_at', { ascending: false });
     if (!error && data && data.length > 0) return data as Product[];
-  } catch (e) {
+  } catch {
     // Fallback
   }
   // Mock fallback: first 4 products
@@ -93,7 +93,7 @@ export async function getArchivedDrops(): Promise<Product[]> {
   try {
     const { data, error } = await supabase.from('products').select('*').eq('drop_tag', 'archived').order('created_at', { ascending: false });
     if (!error && data && data.length > 0) return data as Product[];
-  } catch (e) {
+  } catch {
     // Fallback
   }
   // Mock fallback: last 4 products

@@ -7,26 +7,38 @@
    ============================================================ */
 
 @layer base {
+
   /* Dark Luxury — Default Theme */
   :root {
     /* Backgrounds */
-    --color-void: #080808;     /* Near-black — base of everything */
-    --color-surface: #111111;  /* Card backgrounds, elevated panels */
-    --color-border: #1e1e1e;   /* Subtle separators */
-    --color-muted: #3d3d3d;    /* Disabled states, captions */
+    --color-void: #080808;
+    /* Near-black — base of everything */
+    --color-surface: #111111;
+    /* Card backgrounds, elevated panels */
+    --color-border: #1e1e1e;
+    /* Subtle separators */
+    --color-muted: #3d3d3d;
+    /* Disabled states, captions */
 
     /* Text */
-    --color-primary: #f5f5f0;  /* Main body text — warm white */
-    --color-secondary: #9a9a8a; /* Secondary text — warm grey */
+    --color-primary: #f5f5f0;
+    /* Main body text — warm white */
+    --color-secondary: #9a9a8a;
+    /* Secondary text — warm grey */
 
     /* Brand Accent */
-    --color-gold: #c5a43a;     /* Premium signifier, drop badges, CTAs */
-    --color-gold-dim: #8a7128; /* Hover state for gold elements */
+    --color-gold: #c5a43a;
+    /* Premium signifier, drop badges, CTAs */
+    --color-gold-dim: #8a7128;
+    /* Hover state for gold elements */
 
     /* Semantic */
-    --color-drop: #ff4b4b;     /* Live drop indicator */
-    --color-verified: #3dba6f; /* Authentication confirmed */
-    --color-scarce: #f59e0b;   /* Low stock warning */
+    --color-drop: #ff4b4b;
+    /* Live drop indicator */
+    --color-verified: #3dba6f;
+    /* Authentication confirmed */
+    --color-scarce: #f59e0b;
+    /* Low stock warning */
 
     /* Motion */
     --motion-instant: 80ms ease-out;
@@ -81,6 +93,7 @@
   /* ── Accessibility: Reduced Motion ── */
   /* All transitions and animations disabled if user prefers it */
   @media (prefers-reduced-motion: reduce) {
+
     *,
     *::before,
     *::after {
@@ -92,7 +105,12 @@
   }
 
   /* ── Typography baseline ── */
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: var(--font-sans, system-ui, sans-serif);
     letter-spacing: -0.02em;
     line-height: 1.1;
@@ -106,6 +124,7 @@
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
+
   .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -143,6 +162,7 @@
     background-clip: padding-box;
     position: relative;
   }
+
   .border-gold-gradient::before {
     content: "";
     position: absolute;

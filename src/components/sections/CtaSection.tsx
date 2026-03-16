@@ -18,10 +18,12 @@ export function CtaSection() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (status === 'submitting') return;
     setStatus('submitting');
     // TODO: Wire to email service (Resend / Mailchimp / etc.)
     await new Promise((r) => setTimeout(r, 1000)); // mock delay
     setStatus('success');
+    setEmail('');
   };
 
   return (
@@ -31,8 +33,8 @@ export function CtaSection() {
     >
       <div className="max-w-xl mx-auto text-center">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: '-10%' }}
           transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-col items-center gap-lg"

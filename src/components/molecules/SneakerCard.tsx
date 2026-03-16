@@ -26,9 +26,11 @@ interface SneakerCardProps {
   /** Show a larger editorial style card */
   featured?: boolean;
   className?: string;
+  /** Index for staggered reveal animation */
+  index?: number;
 }
 
-export function SneakerCard({ product, featured = false, className }: SneakerCardProps) {
+export function SneakerCard({ product, featured = false, className, index = 0 }: SneakerCardProps) {
   const scarcityLevel = getScarcityLevel(product.totalPairsLeft);
   const primaryImage = product.images.find((img) => img.isPrimary) ?? product.images[0];
   const secondaryImage = product.images.length > 1 ? product.images.find((img) => img !== primaryImage) : primaryImage;
@@ -70,6 +72,14 @@ export function SneakerCard({ product, featured = false, className }: SneakerCar
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={isHoverable ? { rotateX, rotateY, transformPerspective: 1000 } : {}}
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-50px' }}
+      transition={{
+        delay: index * 0.08, // Stagger of ~80ms 
+        duration: 0.4,
+        ease: [0.16, 1, 0.3, 1]
+      }}
       whileTap={{ scale: 0.98 }}
       className={clsx(
         'group relative flex flex-col',
@@ -88,11 +98,11 @@ export function SneakerCard({ product, featured = false, className }: SneakerCar
       {/* ── Image Area ── */}
       <figure className="relative aspect-square overflow-hidden bg-void shrink-0 z-0">
         {/* Radial highlight lighting effect */}
-        <div 
-          className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.06)_0%,transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-0" 
-          aria-hidden="true" 
+        <div
+          className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.06)_0%,transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-0"
+          aria-hidden="true"
         />
-        
+
         {primaryImage ? (
           <motion.div layoutId={`product-image-${product.slug}`} className="absolute inset-0 z-10 pointer-events-none">
             <Image

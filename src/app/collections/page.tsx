@@ -21,7 +21,7 @@ export default async function CollectionsPage() {
 
   return (
     <main id="main-content" className="min-h-screen bg-void pt-24 pb-5xl">
-      <div className="px-md md:px-xl max-w-screen-xl mx-auto">
+      <div className="px-md md:px-xl max-w-7xl mx-auto">
         {/* Page header */}
         <header className="mb-2xl">
           <MonoLabel muted className="block mb-sm">

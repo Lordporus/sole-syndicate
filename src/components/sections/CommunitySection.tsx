@@ -33,6 +33,7 @@ const TIERS = [
     description: 'Community access. Early drop notifications. Verified purchase history.',
     perks: ['Drop alerts', 'Community forum', 'Basic auth checks'],
     price: 'Free',
+    period: '',
     cta: 'Get Started',
     href: '/syndicate/scout',
     featured: false,
@@ -42,20 +43,22 @@ const TIERS = [
     badge: 'verified' as const,
     description: '24hr early access. Authentication priority. Member-only listings.',
     perks: ['24-hr early access', 'Auth priority service', 'Member auction floor'],
-    price: '$12 / mo',
+    price: '$12',
+    period: '/mo',
     cta: 'Become a Member',
     href: '/syndicate/member',
-    featured: false,
+    featured: true,
   },
   {
     name: 'Syndicate',
     badge: 'edition' as const,
     description: 'The inner circle. First at every drop. Invite-only events. Vault access.',
     perks: ['First access to all drops', 'Vault collection preview', 'Invite-only events', 'Dedicated concierge'],
-    price: '$48 / mo',
+    price: '$48',
+    period: '/mo',
     cta: 'Apply for Access',
     href: '/syndicate',
-    featured: true,
+    featured: false,
   },
 ];
 
@@ -113,7 +116,7 @@ export function CommunitySection() {
         </motion.div>
 
         {/* ── Tier cards ── */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-md">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           {TIERS.map((tier, i) => (
             <motion.article
               key={tier.name}
@@ -121,18 +124,12 @@ export function CommunitySection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className={`relative flex flex-col p-lg border rounded-card transition-shadow duration-normal ${
+              className={`relative flex flex-col p-lg rounded-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl bg-neutral-900 ${
                 tier.featured
-                  ? 'bg-void border-gold shadow-glow-gold'
-                  : 'bg-surface border-border hover:border-muted'
+                  ? 'border border-gold scale-[1.03] shadow-glow-gold z-10'
+                  : 'border border-neutral-800 hover:border-neutral-700'
               }`}
             >
-              {tier.featured && (
-                <div className="absolute inset-0 rounded-card overflow-hidden pointer-events-none" aria-hidden="true">
-                  <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-gold to-transparent opacity-60" />
-                </div>
-              )}
-
               <div className="flex items-center justify-between mb-lg">
                 <h3 className="font-display text-2xl text-primary">
                   {tier.name.toUpperCase()}
@@ -144,9 +141,9 @@ export function CommunitySection() {
                 {tier.description}
               </p>
 
-              <ul className="space-y-sm mb-2xl" role="list">
+              <ul className="space-y-2 mb-2xl" role="list">
                 {tier.perks.map((perk) => (
-                  <li key={perk} className="flex items-center gap-sm text-sm text-secondary">
+                  <li key={perk} className="flex items-center gap-sm text-sm text-neutral-300">
                     <span
                       className={`w-1 h-1 rounded-full shrink-0 ${tier.featured ? 'bg-gold' : 'bg-muted'}`}
                       aria-hidden="true"
@@ -157,14 +154,21 @@ export function CommunitySection() {
               </ul>
 
               <div className="mt-auto">
-                <MonoLabel muted className="block mb-md">
-                  {tier.price}
-                </MonoLabel>
+                <div className="flex items-baseline gap-1 mb-md">
+                  <span className="font-mono text-3xl font-medium text-primary">
+                    {tier.price}
+                  </span>
+                  {tier.period && (
+                    <span className="font-mono text-sm opacity-60 text-primary">
+                      {tier.period}
+                    </span>
+                  )}
+                </div>
                 <Link href={tier.href}>
                   <Button
                     variant={tier.featured ? 'gold' : 'ghost'}
                     size="md"
-                    className="w-full"
+                    className="w-full transition-all duration-200 hover:scale-[1.02] hover:border-gold"
                   >
                     {tier.cta}
                   </Button>
